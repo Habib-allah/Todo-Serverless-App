@@ -21,7 +21,7 @@ npm run start
 ```
 
 ## Deployment details
-API Endpoint
+API Endpoint (No longer up and running)
 ```
 https://w8zvvkqtp9.execute-api.us-east-1.amazonaws.com/dev/todos
 ```
