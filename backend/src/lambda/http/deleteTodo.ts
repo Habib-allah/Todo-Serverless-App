@@ -12,7 +12,7 @@ const logger = createLogger('todos')
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const todoId = event.pathParameters.todoId
     if(!todoId){
-        logger.error('invalid delete attempt without todo id')
+        logger.error('invalid deletion attempt without todo id')
         return apiResponseHelper.generateErrorResponse(400,'invalid parameters')
     }
  
@@ -21,13 +21,13 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
 
     const item = await todosAccess.getTodoById(todoId)
     if(item.Count == 0){
-        logger.error(`user ${userId} requesting delete for non exists todo with id ${todoId}`)
-        return apiResponseHelper.generateErrorResponse(400,'TODO not exists')
+        logger.error(`user ${userId} requesting deletion for non existing todo with id ${todoId}`)
+        return apiResponseHelper.generateErrorResponse(400,'TODO does not exist')
     }
 
     if(item.Items[0].userId !== userId){
-        logger.error(`user ${userId} requesting delete todo does not belong to his account with id ${todoId}`)
-        return apiResponseHelper.generateErrorResponse(400,'TODO does not belong to authorized user')
+        logger.error(`user ${userId} requesting delete todo does not belong to this account with id ${todoId}`)
+        return apiResponseHelper.generateErrorResponse(400,'TODO does not belong to the authorized user')
     }
 
     logger.info(`User ${userId} deleting todo ${todoId}`)
